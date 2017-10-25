@@ -11,7 +11,7 @@ el tipo de datos será bool
 #include <stdbool.h>
 
 /*
-//A partir de aquí podemos
+//A partir de aquí podríamos (tanto en este archivo como en archivos que lo incluyan como fecha.c)
 //usar cosas como: 
 bool correcto;
 correcto = true;
@@ -47,31 +47,15 @@ typedef struct s_fecha fecha;
 
 */
 
-//Devuelve true si la fecha es correcta
-//Devuelve false si la fecha no lo es.
+
 bool fecha_correcta(fecha);
 
-//Devuelve true si el año pasado por parámetro
-// es bisiesto y false en caso contrario.
 bool anyo_bisiesto(short int anyo);
 
-//Devuelve la fecha correspondiente
-//al día siguiente del parámetro
-//La fecha será válida.
 fecha dia_siguiente(fecha);
 
-//Devuelve la fecha correspondiente
-// al día anterior del parametro
-//La fecha será válida.
 fecha dia_anterior(fecha);
 
-//Devuelve una estructura
-//de tipo fecha con los valores
-//anyo, mes y dia pasados por parámetro.
-//En el caso de que la fecha no sea correcta
-//se imprime un mensaje de error y se 
-//devuelve la estructura de la fecha
-//de tu día de nacimiento.
 fecha crear_fecha(short int anyo, short int mes, short int dia);
 
 #endif
