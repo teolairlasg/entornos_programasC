@@ -50,6 +50,10 @@ typedef struct s_fecha fecha;
 
 bool fecha_correcta(fecha);
 
+bool mes_largo(short int);
+
+bool mes_corto(short int);
+
 bool anyo_bisiesto(short int anyo);
 
 fecha dia_siguiente(fecha);

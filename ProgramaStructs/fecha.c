@@ -4,7 +4,7 @@ Precondición:
 	-anyo es un entero corto.
 
 Postcondición:
-	-devuelve true si un año es bisiesto según el calendario gragoriano.
+	-devuelve true si un año es bisiesto según el calendario gregoriano.
 	-devuelve false si no lo es.
 	 los años múltiplos de 4 son bisiestos (febrero 29 días) siempre que no sean múltiplos de 100
 	 (1900 no fue bisiesto) a no ser que sean múltiplos de 400 (2000 sí fue bisiesto)
@@ -13,8 +13,24 @@ Postcondición:
 
 bool anyo_bisiesto(short int anyo){
 
-	//TODO: Rellenar el código de la función para que cumpla la postcondición, basándose en la precondición.
+	bool retorno;
 
+	if (anyo%400 == 0){
+		retorno = true;
+	}else if(anyo%100 == 0){
+		retorno = false;
+	}else if(anyo%4==0){
+		retorno = true;
+	}else{
+		retorno=false;
+	}
+/*
+	if ( (anyo%4==0 && anyo%100!=0) || anyo%400==0 ){
+		retorno = true;
+	}else{
+		retorno = false;
+	}*/
+	return retorno;
 }
 
 /*
@@ -31,9 +47,39 @@ Postcondición:
 */
 bool fecha_correcta(fecha f) {
 
-	//TODO: Rellenar el código de la función para que cumpla la postcondición, basándose en la precondición.
-
+	bool fecha_correcta;
+	if(f.dia <= 0 || f.mes <= 0 || f.mes > 12){
+		fecha_correcta = false;
+	}else if( mes_largo(f.mes) && f.dia > 31 ){
+		fecha_correcta = false;
+	}else if( mes_corto(f.mes) && f.dia > 30){
+		fecha_correcta = false;
+	}else if(f.mes == 2 && anyo_bisiesto(f.anyo) && f.dia > 29){
+		fecha_correcta = false;
+	}else if(f.mes == 2 && !anyo_bisiesto(f.anyo) && f.dia > 28){
+		fecha_correcta = false;
+	}else{
+		fecha_correcta = true;
+	}
+	return fecha_correcta;
 }
+
+bool mes_corto(short int mes){
+	if (mes == 4 || mes == 6 || mes == 9 || mes == 11){
+		return true;
+	}else{
+		return false;
+	}
+}
+
+bool mes_largo(short int mes){
+	if (mes == 1 || mes == 3 || mes == 5 || mes == 7 || mes == 8 || mes == 10 || mes == 12){
+		return true;
+	}else{
+		return false;
+	}
+}
+
 
 
 /*
