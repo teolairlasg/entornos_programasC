@@ -88,11 +88,39 @@ Precondición:
 Postcondición:
 	-devuelve un struct fecha rellenado con los valores año, mes y día del día siguiente a f según el
 	 calendario gregoriano.
-
+	f_nueva = dia_siguiente(f);
 */
 fecha dia_siguiente(fecha f){
 
-	//TODO: Rellenar el código de la función para que cumpla la postcondición, basándose en la precondición.
+	if(mes_largo(f.mes)){
+		if(f.dia<31){
+			f.dia++;
+		}else if(f.mes==12){
+			f.mes=1;
+			f.dia=1;
+			f.anyo++;
+		}else{
+			f.dia=1;
+			f.mes++;
+		}
+	}else if(mes_corto(f.mes)){
+		if(f.dia<30){
+			f.dia++;
+		}else{
+			f.dia=1;
+			f.mes++;
+		}
+	}else if(f.mes==2){
+		if(f.dia<28 || (f.dia<29 && anyo_bisiesto(f.anyo)) ){
+			f.dia++;
+		}else{
+			f.dia=1;
+			f.mes++;
+		}
+	}else{
+		fprintf(stderr, "La fecha %d/%d/%d no es correcta.\n", f.dia, f.mes, f.anyo);
+	}
+	return f;
 
 }
 
@@ -117,14 +145,23 @@ fecha dia_anterior(fecha f){
 Precondición: 
 	anyo, mes y dia son enteros cortos (short int)
 Postcondición:
-	-devuelve un struct fecha rellenado con los valores año, mes y día del día pasados, sólo si la fecha que 
+	-devuelve un struct fecha rellenado con los valores año, mes y día de la fecha pasados, sólo si la fecha que 
 	 producen es correcta, en caso de que la fecha fuera incorrecta mostraría un mensaje de error por pantalla
 	 y devolvería un struct con la fecha 01 de enero de 1970.
 
 */
 
-fecha crear_fecha(short int anyo, short int mes, short int dia){
+fecha crear_fecha(short int parametro_anyo, short int parametro_mes, short int parametro_dia){
 
 	//TODO: Rellenar el código de la función para que cumpla la postcondición, basándose en la precondición.
-	
+	fecha f;
+	f.anyo=parametro_anyo;
+	f.mes=parametro_mes;
+	f.dia=parametro_dia;
+	if(!fecha_correcta(f)){
+		f.anyo=1970;
+		f.mes=1;
+		f.dia=1;
+	}
+	return f;
 }
