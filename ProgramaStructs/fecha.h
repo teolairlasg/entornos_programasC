@@ -1,30 +1,7 @@
 #ifndef FECHA_H
 #define FECHA_H
 
-/*
-La librería stdbool.h da la 
-funcionalidad de las variables
-booleanas. true y false.
-el tipo de datos será bool
-*/
-
-#include <stdbool.h>
-
-/*
-//A partir de aquí podríamos (tanto en este archivo como en archivos que lo incluyan como fecha.c)
-//usar cosas como: 
-bool correcto;
-correcto = true;
-correcto = false;
-if(!correcto){
-	
-}
-
-while(correcto){
-	correcto = !correcto;
-}
-
-*/
+#include <stdbool.h> //Funcionalidad booleana true, false...
 
 //Definimos el contenido
 //de la estructura fecha.
@@ -42,24 +19,18 @@ struct s_fecha{
 	short int mes;
 	short int dia;
 };
-
 typedef struct s_fecha fecha;
-
 */
-
-
 bool fecha_correcta(fecha);
-
 bool mes_largo(short int);
-
 bool mes_corto(short int);
-
 bool anyo_bisiesto(short int anyo);
-
 fecha dia_siguiente(fecha);
-
 fecha dia_anterior(fecha);
-
 fecha crear_fecha(short int anyo, short int mes, short int dia);
+fecha avanzar_dias(fecha, int);
+fecha retroceder_dias(fecha, int);
+void imprimir_fecha(fecha);
+
 
 #endif

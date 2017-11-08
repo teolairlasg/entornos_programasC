@@ -1,4 +1,5 @@
 #include "fecha.h"
+#include <stdio.h>
 /*
 Precondición:
 	-anyo es un entero corto.
@@ -124,7 +125,6 @@ fecha dia_siguiente(fecha f){
 
 }
 
-
 /*
 Precondición: 
 	-f es una fecha correcta (validada con la función)
@@ -138,7 +138,28 @@ Postcondición:
 fecha dia_anterior(fecha f){
 
 	//TODO: Rellenar el código de la función para que cumpla la postcondición, basándose en la precondición.
-
+	short int mes_anterior=f.mes-1; //calculamos el mes anterior.
+	if (f.dia!=1){
+		f.dia--;
+	}else if(mes_corto(mes_anterior)){ //si es corto (30 días) el anterior
+		f.dia=30;
+		f.mes--;
+	}else if(f.mes==1){ //si el mes es enero (largo)
+		f.dia=31;
+		f.mes=12;
+		f.anyo--;
+	}else if(f.mes==3){ //si el mes es marzo (el anterior es febrero)
+		f.mes=2;
+		if(anyo_bisiesto(f.anyo)){
+			f.dia=29;
+		}else{
+			f.dia=28;
+		}
+	}else{
+		f.dia=31;
+		f.mes--;
+	}
+	return f;
 }
 
 /*
@@ -165,3 +186,39 @@ fecha crear_fecha(short int parametro_anyo, short int parametro_mes, short int p
 	}
 	return f;
 }
+
+void imprimir_fecha(fecha f){
+	printf("%d/%d/%d\n",f.dia,f.mes,f.anyo);
+}
+
+/* Precondición: 
+   -f es una fecha válida.
+   -n_dias es un entero positivo.
+   Post-condición:
+   -devuelve la fecha de dentro de n_dias días.
+*/
+
+fecha avanzar_dias(fecha f, int n_dias){
+
+	int i;
+	for(i=0;i<n_dias;i++){
+		f=dia_siguiente(f);
+	}
+	return f;
+}
+/* Precondición: 
+   -f es una fecha válida.
+   -n_dias es un entero positivo.
+   Post-condición:
+   -devuelve la fecha de hace n_dias días.
+*/
+
+fecha retroceder_dias(fecha f, int n_dias){
+	int i;
+	for(i=0;i<n_dias;i++){
+		f=dia_anterior(f);
+	}
+	return f;
+}
+
+
